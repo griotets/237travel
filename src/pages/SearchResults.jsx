@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { 
-  Filter, 
-  SortDesc, 
-  MapPin, 
-  Clock, 
-  Users, 
+import {
+  Filter,
+  SortDesc,
+  MapPin,
+  Clock,
+  Users,
   Star,
   Bus,
   ArrowRight,
-  Calendar
+  Calendar,
+  Search
 } from 'lucide-react'
 import { useCart } from '../contexts/CartContext'
 import { useAuth } from '../contexts/AuthContext'
