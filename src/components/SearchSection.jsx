@@ -57,11 +57,91 @@ const SearchSection = ({ isCompact = false }) => {
     return tomorrow.toISOString().split('T')[0]
   }
 
+  if (isCompact) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="space-y-4"
+      >
+        <form onSubmit={handleSearch} className="space-y-4">
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <input
+                type="text"
+                list="from-cities-compact"
+                value={searchData.from}
+                onChange={(e) => handleInputChange('from', e.target.value)}
+                className="w-full px-3 py-2 bg-white/20 border border-white/30 rounded-lg placeholder-white/70 text-white focus:outline-none focus:border-white"
+                placeholder="Départ"
+                required
+              />
+              <datalist id="from-cities-compact">
+                {cameroonCities.map(city => (
+                  <option key={city} value={city} />
+                ))}
+              </datalist>
+            </div>
+            <div>
+              <input
+                type="text"
+                list="to-cities-compact"
+                value={searchData.to}
+                onChange={(e) => handleInputChange('to', e.target.value)}
+                className="w-full px-3 py-2 bg-white/20 border border-white/30 rounded-lg placeholder-white/70 text-white focus:outline-none focus:border-white"
+                placeholder="Destination"
+                required
+              />
+              <datalist id="to-cities-compact">
+                {cameroonCities.map(city => (
+                  <option key={city} value={city} />
+                ))}
+              </datalist>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <input
+              type="date"
+              value={searchData.date}
+              onChange={(e) => handleInputChange('date', e.target.value)}
+              min={getTomorrowDate()}
+              className="w-full px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white focus:outline-none focus:border-white"
+              required
+            />
+            <select
+              value={searchData.passengers}
+              onChange={(e) => handleInputChange('passengers', e.target.value)}
+              className="w-full px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white focus:outline-none focus:border-white"
+            >
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => (
+                <option key={num} value={num} className="text-gray-900">
+                  {num} passager{num > 1 ? 's' : ''}
+                </option>
+              ))}
+            </select>
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-white text-primary-600 hover:bg-gray-100 font-semibold py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center space-x-2"
+          >
+            <Search className="w-4 h-4" />
+            <span>Rechercher</span>
+          </button>
+        </form>
+      </motion.div>
+    )
+  }
+
   return (
     <section className="py-20 bg-white relative overflow-hidden">
       {/* Background Elements */}
-      <div className="absolute inset-0 futuristic-grid opacity-30"></div>
-      
+      <div className="absolute inset-0 opacity-5">
+        <div className="w-full h-full" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23a855f7' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }}></div>
+      </div>
+
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -70,7 +150,7 @@ const SearchSection = ({ isCompact = false }) => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary-600 to-secondary-500 bg-clip-text text-transparent mb-4">
             Trouvez votre voyage idéal
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
