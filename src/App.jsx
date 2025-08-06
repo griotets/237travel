@@ -44,6 +44,9 @@ function App() {
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/support" element={<SupportPage />} />
               <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/agencies" element={<AgenciesPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/contact" element={<ContactPage />} />
             </Routes>
           </main>
           <Footer />
