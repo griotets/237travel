@@ -128,14 +128,15 @@ const SearchResults = () => {
       else if (filterBy === 'standard') typeMatch = result.busType === 'Standard'
       else if (filterBy === 'luxe') typeMatch = result.busType === 'Luxe'
 
-      // Filter by time if specified
-      const timeMatch = isTimeInRange(result.departureTime, time)
+      // Filter by time if specified (use current time filter)
+      const currentTimeFilter = localTime || time
+      const timeMatch = isTimeInRange(result.departureTime, currentTimeFilter)
 
       return typeMatch && timeMatch
     })
 
     setResults(filtered)
-  }, [sortBy, filterBy, time])
+  }, [sortBy, filterBy, localTime, time])
 
   const [selectedTrip, setSelectedTrip] = useState(null)
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false)
