@@ -11,6 +11,9 @@ import AgenciesPage from './pages/AgenciesPage'
 import AboutPage from './pages/AboutPage'
 import ContactPage from './pages/ContactPage'
 import AgencyRegistration from './pages/AgencyRegistration'
+import BookingDetails from './pages/BookingDetails'
+import BookingsPage from './pages/BookingsPage'
+import SettingsPage from './pages/SettingsPage'
 import Footer from './components/Footer'
 import { AuthProvider } from './contexts/AuthContext'
 import { CartProvider } from './contexts/CartContext'
@@ -49,6 +52,9 @@ function App() {
               <Route path="/about" element={<AboutPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/register-agency" element={<AgencyRegistration />} />
+              <Route path="/booking" element={<BookingDetails />} />
+              <Route path="/bookings" element={<BookingsPage />} />
+              <Route path="/settings" element={<SettingsPage />} />
             </Routes>
           </main>
           <Footer />
