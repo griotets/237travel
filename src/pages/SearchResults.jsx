@@ -21,8 +21,6 @@ const SearchResults = () => {
   const [sortBy, setSortBy] = useState('price')
   const [filterBy, setFilterBy] = useState('all')
   const [showFilters, setShowFilters] = useState(false)
-  const [localDate, setLocalDate] = useState(date)
-  const [localTime, setLocalTime] = useState(time)
   const { addItem } = useCart()
   const { isAuthenticated } = useAuth()
 
@@ -32,6 +30,9 @@ const SearchResults = () => {
   const date = searchParams.get('date') || ''
   const time = searchParams.get('time') || ''
   const passengers = searchParams.get('passengers') || '1'
+
+  const [localDate, setLocalDate] = useState(date)
+  const [localTime, setLocalTime] = useState(time)
 
   // Mock search results - in a real app, this would come from an API
   const mockResults = [
