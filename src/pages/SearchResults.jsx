@@ -15,6 +15,7 @@ import {
 import { useCart } from '../contexts/CartContext'
 import { useAuth } from '../contexts/AuthContext'
 import BookingModal from '../components/BookingModal'
+import SearchSection from '../components/SearchSection'
 
 const SearchResults = () => {
   const [searchParams] = useSearchParams()
@@ -253,10 +254,23 @@ const SearchResults = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Quick Search */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-primary-600 rounded-2xl shadow-lg p-6 mb-8"
+        >
+          <h3 className="text-white font-semibold mb-4 text-center">
+            Nouvelle recherche rapide
+          </h3>
+          <SearchSection isCompact={true} />
+        </motion.div>
+
         {/* Search Summary with Edit Option */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
           className="bg-white rounded-2xl shadow-lg p-6 mb-8"
         >
           <div className="flex flex-wrap items-center justify-between gap-4">
@@ -293,12 +307,6 @@ const SearchResults = () => {
               <p className="text-sm text-gray-600">
                 {results.length} voyage{results.length > 1 ? 's' : ''} trouvé{results.length > 1 ? 's' : ''}
               </p>
-              <button
-                onClick={() => window.history.back()}
-                className="text-primary-600 hover:text-primary-700 text-sm font-medium mt-1"
-              >
-                Modifier la recherche
-              </button>
             </div>
           </div>
         </motion.div>
