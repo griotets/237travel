@@ -35,7 +35,7 @@ const Footer = () => {
     <footer className="bg-gray-900 text-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
-        <div className="futuristic-grid h-full"></div>
+        <div className="professional-grid h-full"></div>
       </div>
 
       <div className="relative z-10">
