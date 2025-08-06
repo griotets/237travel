@@ -24,43 +24,43 @@ const Home = () => {
   const topAgencies = [
     {
       id: 1,
-      name: "Guarantee Express",
-      description: "Leader du transport interurbain au Cameroun depuis 1990",
+      name: "Touristique Express",
+      description: "Compagnie majeure reconnue pour ses bus climatisés et le respect des horaires",
       rating: 4.8,
       routes: 120,
       vehicles: 85,
       image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400",
-      speciality: "Yaoundé - Douala - Bafoussam"
+      speciality: "Business & Master Class"
     },
     {
       id: 2,
-      name: "Central Voyage",
-      description: "Service premium pour tous vos déplacements",
-      rating: 4.6,
-      routes: 95,
-      vehicles: 67,
+      name: "Men Travel",
+      description: "Bus confortables pour les liaisons Yaoundé-Douala-Kribi depuis 2019",
+      rating: 4.5,
+      routes: 80,
+      vehicles: 45,
       image: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=400",
-      speciality: "Transport VIP et Luxe"
+      speciality: "Yaoundé-Douala-Kribi"
     },
     {
       id: 3,
-      name: "Alliance Voyage",
-      description: "Confort et ponctualité garantis sur tout le territoire",
+      name: "Jully Voyages",
+      description: "Agence historique créée en 1977, services complets de voyage",
       rating: 4.7,
-      routes: 110,
-      vehicles: 72,
+      routes: 90,
+      vehicles: 60,
       image: "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400",
-      speciality: "Couverture nationale"
+      speciality: "Agence historique complète"
     },
     {
       id: 4,
-      name: "Musango Express",
-      description: "Votre partenaire de confiance pour voyager en sécurité",
-      rating: 4.5,
-      routes: 88,
-      vehicles: 55,
+      name: "Galaxie Voyage",
+      description: "Réputée pour son service de qualité, la sécurité et la ponctualité",
+      rating: 4.7,
+      routes: 70,
+      vehicles: 50,
       image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400",
-      speciality: "Nord - Sud Cameroun"
+      speciality: "Qualité & Ponctualité"
     }
   ]
 
@@ -70,20 +70,20 @@ const Home = () => {
       id: 1,
       from: "Yaoundé",
       to: "Douala",
-      agency: "Guarantee Express",
-      price: 3500,
-      departureTime: "08:00",
+      agency: "Touristique Express",
+      price: 4500,
+      departureTime: "07:00",
       availableSeats: 12,
       totalSeats: 50,
       image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=300"
     },
     {
       id: 2,
-      from: "Douala",
-      to: "Bafoussam",
-      agency: "Central Voyage",
-      price: 4200,
-      departureTime: "09:30",
+      from: "Yaoundé",
+      to: "Kribi",
+      agency: "Men Travel",
+      price: 3200,
+      departureTime: "08:30",
       availableSeats: 8,
       totalSeats: 45,
       image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300"
@@ -91,21 +91,21 @@ const Home = () => {
     {
       id: 3,
       from: "Yaoundé",
-      to: "Ngaoundéré",
-      agency: "Alliance Voyage",
-      price: 8500,
-      departureTime: "07:00",
+      to: "Bafoussam",
+      agency: "Binam Voyages",
+      price: 4000,
+      departureTime: "09:00",
       availableSeats: 15,
       totalSeats: 48,
       image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300"
     },
     {
       id: 4,
-      from: "Douala",
-      to: "Bamenda",
-      agency: "Musango Express",
-      price: 5800,
-      departureTime: "10:15",
+      from: "Yaoundé",
+      to: "Ebolowa",
+      agency: "Buca Voyages",
+      price: 2800,
+      departureTime: "11:00",
       availableSeats: 6,
       totalSeats: 42,
       image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=300"
