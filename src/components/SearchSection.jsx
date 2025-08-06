@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { Search, MapPin, Calendar, Users, ArrowLeftRight } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 
-const SearchSection = () => {
+const SearchSection = ({ isCompact = false }) => {
   const navigate = useNavigate()
   const [searchData, setSearchData] = useState({
     from: '',
