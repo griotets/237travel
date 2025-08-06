@@ -250,15 +250,14 @@ const Navbar = () => {
                   <Link
                     key={item.name}
                     to={item.href}
-                    className={`flex items-center space-x-3 px-4 py-3 rounded-lg font-medium transition-colors ${
+                    className={`block px-4 py-3 rounded-lg font-medium transition-colors ${
                       location.pathname === item.href
                         ? 'text-primary-600 bg-primary-50'
                         : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
                     }`}
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    <span>{item.icon}</span>
-                    <span>{item.name}</span>
+                    {item.name}
                   </Link>
                 ))}
               </div>
