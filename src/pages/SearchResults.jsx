@@ -255,14 +255,14 @@ const SearchResults = () => {
           animate={{ opacity: 1, y: 0 }}
           className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 mb-8"
         >
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-gray-900 flex items-center">
-              <Search className="w-5 h-5 mr-2 text-primary-600" />
-              Nouvelle recherche
-            </h3>
-            <span className="text-sm text-gray-500">Trouvez d'autres voyages</span>
-          </div>
-          <div className="bg-gradient-to-r from-primary-600 to-secondary-500 rounded-xl p-4">
+          <div className="bg-gradient-to-r from-primary-600 to-secondary-500 rounded-xl p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold text-white flex items-center">
+                <Search className="w-5 h-5 mr-2 text-white" />
+                Nouvelle recherche
+              </h3>
+              <span className="text-sm text-white/80">Trouvez d'autres voyages</span>
+            </div>
             <SearchSection isCompact={true} />
           </div>
         </motion.div>
