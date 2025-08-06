@@ -10,6 +10,7 @@ import AdminDashboard from './pages/AdminDashboard'
 import AgenciesPage from './pages/AgenciesPage'
 import AboutPage from './pages/AboutPage'
 import ContactPage from './pages/ContactPage'
+import AgencyRegistration from './pages/AgencyRegistration'
 import Footer from './components/Footer'
 import { AuthProvider } from './contexts/AuthContext'
 import { CartProvider } from './contexts/CartContext'
@@ -47,6 +48,7 @@ function App() {
               <Route path="/agencies" element={<AgenciesPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/register-agency" element={<AgencyRegistration />} />
             </Routes>
           </main>
           <Footer />
