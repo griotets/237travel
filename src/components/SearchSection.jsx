@@ -9,6 +9,7 @@ const SearchSection = ({ isCompact = false }) => {
     from: '',
     to: '',
     date: '',
+    time: '',
     passengers: '1'
   })
 
