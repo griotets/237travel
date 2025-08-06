@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "echo 'Please configure your dev server command'",
-    "build": "echo 'Please configure your build command'",
-    "start": "echo 'Please configure your start command'"
+    "dev": "http-server . -p 8080 -c-1",
+    "build": "echo 'No build process needed for static files'",
+    "start": "npm run dev"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
   }
 }
