@@ -14,6 +14,7 @@ import AgencyRegistration from './pages/AgencyRegistration'
 import BookingDetails from './pages/BookingDetails'
 import BookingsPage from './pages/BookingsPage'
 import SettingsPage from './pages/SettingsPage'
+import TestUsers from './pages/TestUsers'
 import Footer from './components/Footer'
 import { AuthProvider } from './contexts/AuthContext'
 import { CartProvider } from './contexts/CartContext'
@@ -55,6 +56,7 @@ function App() {
               <Route path="/booking" element={<BookingDetails />} />
               <Route path="/bookings" element={<BookingsPage />} />
               <Route path="/settings" element={<SettingsPage />} />
+              <Route path="/test-users" element={<TestUsers />} />
             </Routes>
           </main>
           <Footer />
