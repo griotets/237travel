@@ -1,16 +1,298 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App</title>
+    <title>237Travel - Votre Agence de Voyage au Cameroun</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to Your App</h1>
-        <p>Your development server is running successfully!</p>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>237Travel</h2>
+                <span class="tagline">Voyagez en toute confiance</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#accueil" class="nav-link active">Accueil</a></li>
+                <li><a href="#voyages" class="nav-link">Voyages</a></li>
+                <li><a href="#evenements" class="nav-link">Événements</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#" class="nav-link" onclick="showLogin()">Connexion</a></li>
+                <li><a href="#" class="cart-icon" onclick="showCart()"><i class="fas fa-shopping-cart"></i> <span class="cart-count">0</span></a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="hero">
+        <div class="hero-content">
+            <h1>Découvrez le Cameroun avec 237Travel</h1>
+            <p>Réservez vos billets de transport, événements et excursions en toute simplicité</p>
+            
+            <!-- Search Form -->
+            <div class="search-container">
+                <div class="search-tabs">
+                    <button class="tab-btn active" data-tab="transport">Transport</button>
+                    <button class="tab-btn" data-tab="events">Événements</button>
+                    <button class="tab-btn" data-tab="tours">Excursions</button>
+                </div>
+                
+                <form class="search-form" id="transport-form">
+                    <div class="search-row">
+                        <div class="search-field">
+                            <label>Départ</label>
+                            <input type="text" placeholder="Ville de départ" id="departure">
+                        </div>
+                        <div class="search-field">
+                            <label>Destination</label>
+                            <input type="text" placeholder="Ville d'arrivée" id="destination">
+                        </div>
+                        <div class="search-field">
+                            <label>Date</label>
+                            <input type="date" id="travel-date">
+                        </div>
+                        <div class="search-field">
+                            <label>Passagers</label>
+                            <select id="passengers">
+                                <option value="1">1 passager</option>
+                                <option value="2">2 passagers</option>
+                                <option value="3">3 passagers</option>
+                                <option value="4">4+ passagers</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="search-btn">Rechercher</button>
+                    </div>
+                </form>
+
+                <form class="search-form hidden" id="events-form">
+                    <div class="search-row">
+                        <div class="search-field">
+                            <label>Ville</label>
+                            <input type="text" placeholder="Ville" id="event-city">
+                        </div>
+                        <div class="search-field">
+                            <label>Type d'événement</label>
+                            <select id="event-type">
+                                <option value="">Tous</option>
+                                <option value="concert">Concert</option>
+                                <option value="conference">Conférence</option>
+                                <option value="festival">Festival</option>
+                                <option value="sport">Sport</option>
+                            </select>
+                        </div>
+                        <div class="search-field">
+                            <label>Date</label>
+                            <input type="date" id="event-date">
+                        </div>
+                        <button type="submit" class="search-btn">Rechercher</button>
+                    </div>
+                </form>
+
+                <form class="search-form hidden" id="tours-form">
+                    <div class="search-row">
+                        <div class="search-field">
+                            <label>Destination</label>
+                            <input type="text" placeholder="Destination" id="tour-destination">
+                        </div>
+                        <div class="search-field">
+                            <label>Durée</label>
+                            <select id="tour-duration">
+                                <option value="">Toutes</option>
+                                <option value="1">1 jour</option>
+                                <option value="2-3">2-3 jours</option>
+                                <option value="week">1 semaine</option>
+                                <option value="more">Plus</option>
+                            </select>
+                        </div>
+                        <div class="search-field">
+                            <label>Date</label>
+                            <input type="date" id="tour-date">
+                        </div>
+                        <button type="submit" class="search-btn">Rechercher</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Offers -->
+    <section class="popular-offers">
+        <div class="container">
+            <h2 class="section-title">Offres Populaires</h2>
+            <div class="offers-grid">
+                <div class="offer-card">
+                    <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400" alt="Transport Yaoundé-Douala">
+                    <div class="offer-content">
+                        <h3>Yaoundé - Douala</h3>
+                        <p>Transport confortable et rapide</p>
+                        <div class="offer-price">À partir de 3,500 FCFA</div>
+                        <button class="btn-primary" onclick="bookOffer('transport', 'yaoundé-douala')">Réserver</button>
+                    </div>
+                </div>
+                
+                <div class="offer-card">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400" alt="Mont Cameroun">
+                    <div class="offer-content">
+                        <h3>Ascension Mont Cameroun</h3>
+                        <p>Excursion de 3 jours</p>
+                        <div class="offer-price">45,000 FCFA</div>
+                        <button class="btn-primary" onclick="bookOffer('tour', 'mont-cameroun')">Réserver</button>
+                    </div>
+                </div>
+                
+                <div class="offer-card">
+                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400" alt="Festival Ngondo">
+                    <div class="offer-content">
+                        <h3>Festival Ngondo</h3>
+                        <p>Événement culturel traditionnel</p>
+                        <div class="offer-price">5,000 FCFA</div>
+                        <button class="btn-primary" onclick="bookOffer('event', 'ngondo')">Réserver</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">Nos Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-bus"></i>
+                    <h3>Transport</h3>
+                    <p>Billets de bus, taxi, et transport interurbain</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Événements</h3>
+                    <p>Concerts, festivals, conférences et spectacles</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-mountain"></i>
+                    <h3>Excursions</h3>
+                    <p>Voyages organisés et découverte du Cameroun</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Paiement Mobile</h3>
+                    <p>MTN Mobile Money et Orange Money</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Connexion</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mot de passe:</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn-primary">Se connecter</button>
+                <p class="auth-switch">Pas de compte ? <a href="#" onclick="showRegister()">S'inscrire</a></p>
+            </form>
+        </div>
     </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Inscription</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="fullName">Nom complet:</label>
+                    <input type="text" id="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email:</label>
+                    <input type="email" id="regEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Téléphone:</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Mot de passe:</label>
+                    <input type="password" id="regPassword" required>
+                </div>
+                <button type="submit" class="btn-primary">S'inscrire</button>
+                <p class="auth-switch">Déjà un compte ? <a href="#" onclick="showLogin()">Se connecter</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Panier</h2>
+            <div id="cartItems">
+                <p class="empty-cart">Votre panier est vide</p>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">Total: <span id="cartTotal">0 FCFA</span></div>
+                <button class="btn-primary" onclick="proceedToCheckout()">Procéder au paiement</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>237Travel</h3>
+                    <p>Votre partenaire de confiance pour voyager au Cameroun.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="#accueil">Accueil</a></li>
+                        <li><a href="#voyages">Voyages</a></li>
+                        <li><a href="#evenements">Événements</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-phone"></i> +237 6XX XXX XXX</p>
+                    <p><i class="fas fa-envelope"></i> info@237travel.cm</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Yaoundé, Cameroun</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Paiement accepté</h4>
+                    <div class="payment-methods">
+                        <span class="payment-badge">MTN MoMo</span>
+                        <span class="payment-badge">Orange Money</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 237Travel. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
