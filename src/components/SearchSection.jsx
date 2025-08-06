@@ -115,7 +115,7 @@ const SearchSection = ({ isCompact = false }) => {
               </datalist>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-3 gap-3">
             <input
               type="date"
               value={searchData.date}
@@ -124,6 +124,24 @@ const SearchSection = ({ isCompact = false }) => {
               className="w-full px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white focus:outline-none focus:border-white"
               required
             />
+            <select
+              value={searchData.time}
+              onChange={(e) => handleInputChange('time', e.target.value)}
+              className="w-full px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white focus:outline-none focus:border-white"
+            >
+              <option value="" className="text-gray-900">Toute heure</option>
+              <option value="morning" className="text-gray-900">Matin</option>
+              <option value="afternoon" className="text-gray-900">Après-midi</option>
+              <option value="evening" className="text-gray-900">Soir</option>
+              <option value="06:00" className="text-gray-900">06:00</option>
+              <option value="08:00" className="text-gray-900">08:00</option>
+              <option value="10:00" className="text-gray-900">10:00</option>
+              <option value="12:00" className="text-gray-900">12:00</option>
+              <option value="14:00" className="text-gray-900">14:00</option>
+              <option value="16:00" className="text-gray-900">16:00</option>
+              <option value="18:00" className="text-gray-900">18:00</option>
+              <option value="20:00" className="text-gray-900">20:00</option>
+            </select>
             <select
               value={searchData.passengers}
               onChange={(e) => handleInputChange('passengers', e.target.value)}
