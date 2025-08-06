@@ -188,7 +188,10 @@ const Footer = () => {
                 viewport={{ once: true }}
                 className="text-gray-400 text-sm mb-4 md:mb-0"
               >
-                © 2024 EnjoyTravel. Tous droits réservés.
+                © 2024 EnjoyTravel. Tous droits réservés. •
+                <Link to="/test-users" className="text-gray-500 hover:text-gray-300 transition-colors">
+                  Comptes de test
+                </Link>
               </motion.div>
 
               {/* Social Links */}
