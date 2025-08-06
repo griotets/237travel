@@ -151,7 +151,7 @@ const SearchSection = ({ isCompact = false }) => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary-600 to-secondary-500 bg-clip-text text-transparent mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-primary-600 mb-4">
             Trouvez votre voyage idéal
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
