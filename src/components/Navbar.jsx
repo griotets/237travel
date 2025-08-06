@@ -35,9 +35,11 @@ const Navbar = () => {
   }, [])
 
   const navigation = [
-    { name: 'Accueil', href: '/', icon: '🏠' },
-    { name: 'Voyages', href: '/search', icon: '🚌' },
-    { name: 'Support', href: '/support', icon: '💬' },
+    { name: 'Accueil', href: '/' },
+    { name: 'Voyages', href: '/search' },
+    { name: 'Agences', href: '/agencies' },
+    { name: 'À propos', href: '/about' },
+    { name: 'Contact', href: '/contact' },
   ]
 
   const handleLogout = () => {
