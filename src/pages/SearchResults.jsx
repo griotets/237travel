@@ -258,12 +258,18 @@ const SearchResults = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-primary-600 rounded-2xl shadow-lg p-6 mb-8"
+          className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 mb-8"
         >
-          <h3 className="text-white font-semibold mb-4 text-center">
-            Nouvelle recherche rapide
-          </h3>
-          <SearchSection isCompact={true} />
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-gray-900 flex items-center">
+              <Search className="w-5 h-5 mr-2 text-primary-600" />
+              Nouvelle recherche
+            </h3>
+            <span className="text-sm text-gray-500">Trouvez d'autres voyages</span>
+          </div>
+          <div className="bg-gradient-to-r from-primary-600 to-secondary-500 rounded-xl p-4">
+            <SearchSection isCompact={true} />
+          </div>
         </motion.div>
 
         {/* Search Summary with Edit Option */}
