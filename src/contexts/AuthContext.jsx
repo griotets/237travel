@@ -25,16 +25,52 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      // Simulate API call
-      const mockUser = {
-        id: '1',
-        email,
-        name: email.split('@')[0],
-        phone: '+237 6XX XXX XXX',
-        joinDate: new Date().toISOString(),
-        avatar: `https://ui-avatars.com/api/?name=${email}&background=7c3aed&color=fff`
+      // Test users for different roles
+      const testUsers = {
+        'admin@enjoytravel.cm': {
+          id: 'admin1',
+          email: 'admin@enjoytravel.cm',
+          name: 'Admin EnjoyTravel',
+          role: 'admin',
+          phone: '+237 699 123 456',
+          joinDate: '2023-01-01T00:00:00.000Z',
+          avatar: 'https://ui-avatars.com/api/?name=Admin+EnjoyTravel&background=dc2626&color=fff'
+        },
+        'user@test.cm': {
+          id: 'user1',
+          email: 'user@test.cm',
+          name: 'Utilisateur Test',
+          role: 'user',
+          phone: '+237 677 987 654',
+          joinDate: '2023-06-15T00:00:00.000Z',
+          avatar: 'https://ui-avatars.com/api/?name=Utilisateur+Test&background=7c3aed&color=fff'
+        },
+        'agency@touristique.cm': {
+          id: 'agency1',
+          email: 'agency@touristique.cm',
+          name: 'Touristique Express',
+          role: 'agency',
+          phone: '+237 696 247 916',
+          joinDate: '2023-03-10T00:00:00.000Z',
+          avatar: 'https://ui-avatars.com/api/?name=Touristique+Express&background=f97316&color=fff'
+        }
       }
-      
+
+      let mockUser = testUsers[email]
+
+      if (!mockUser) {
+        // Create a default user if not in test users
+        mockUser = {
+          id: Date.now().toString(),
+          email,
+          name: email.split('@')[0],
+          role: 'user',
+          phone: '+237 6XX XXX XXX',
+          joinDate: new Date().toISOString(),
+          avatar: `https://ui-avatars.com/api/?name=${email}&background=7c3aed&color=fff`
+        }
+      }
+
       setUser(mockUser)
       localStorage.setItem('enjoytravel_user', JSON.stringify(mockUser))
       return { success: true }
