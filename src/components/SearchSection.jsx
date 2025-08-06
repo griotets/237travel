@@ -58,6 +58,20 @@ const SearchSection = ({ isCompact = false }) => {
     return today.toISOString().split('T')[0]
   }
 
+  const getTomorrowDate = () => {
+    const tomorrow = new Date()
+    tomorrow.setDate(tomorrow.getDate() + 1)
+    return tomorrow.toISOString().split('T')[0]
+  }
+
+  const setToday = () => {
+    handleInputChange('date', getTodayDate())
+  }
+
+  const setTomorrow = () => {
+    handleInputChange('date', getTomorrowDate())
+  }
+
   if (isCompact) {
     return (
       <motion.div
@@ -249,6 +263,22 @@ const SearchSection = ({ isCompact = false }) => {
                     required
                   />
                 </div>
+                <div className="flex gap-2 mt-2">
+                  <button
+                    type="button"
+                    onClick={setToday}
+                    className="text-xs px-3 py-1 bg-primary-100 text-primary-700 rounded-md hover:bg-primary-200 transition-colors"
+                  >
+                    Aujourd'hui
+                  </button>
+                  <button
+                    type="button"
+                    onClick={setTomorrow}
+                    className="text-xs px-3 py-1 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors"
+                  >
+                    Demain
+                  </button>
+                </div>
               </div>
 
               {/* Time */}
@@ -322,27 +352,53 @@ const SearchSection = ({ isCompact = false }) => {
 
           {/* Quick Options */}
           <div className="mt-8 pt-6 border-t border-gray-200">
-            <p className="text-sm font-medium text-gray-700 mb-4">Trajets populaires :</p>
-            <div className="flex flex-wrap gap-2">
-              {[
-                { from: 'Yaoundé', to: 'Douala' },
-                { from: 'Douala', to: 'Bafoussam' },
-                { from: 'Yaoundé', to: 'Ngaoundéré' },
-                { from: 'Douala', to: 'Bamenda' }
-              ].map((route, index) => (
-                <motion.button
-                  key={index}
-                  onClick={() => {
-                    handleInputChange('from', route.from)
-                    handleInputChange('to', route.to)
-                  }}
-                  className="px-4 py-2 bg-gray-100 hover:bg-primary-50 text-gray-700 hover:text-primary-600 rounded-lg text-sm font-medium transition-colors border border-gray-200 hover:border-primary-200"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {route.from} → {route.to}
-                </motion.button>
-              ))}
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <p className="text-sm font-medium text-gray-700 mb-4">Trajets populaires :</p>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    { from: 'Yaoundé', to: 'Douala' },
+                    { from: 'Douala', to: 'Bafoussam' },
+                    { from: 'Yaoundé', to: 'Ngaoundéré' },
+                    { from: 'Douala', to: 'Bamenda' }
+                  ].map((route, index) => (
+                    <motion.button
+                      key={index}
+                      onClick={() => {
+                        handleInputChange('from', route.from)
+                        handleInputChange('to', route.to)
+                      }}
+                      className="px-4 py-2 bg-gray-100 hover:bg-primary-50 text-gray-700 hover:text-primary-600 rounded-lg text-sm font-medium transition-colors border border-gray-200 hover:border-primary-200"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {route.from} → {route.to}
+                    </motion.button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <p className="text-sm font-medium text-gray-700 mb-4">Horaires populaires :</p>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    { value: 'morning', label: 'Matin' },
+                    { value: '08:00', label: '8h00' },
+                    { value: '14:00', label: '14h00' },
+                    { value: 'evening', label: 'Soir' }
+                  ].map((timeOption, index) => (
+                    <motion.button
+                      key={index}
+                      onClick={() => handleInputChange('time', timeOption.value)}
+                      className="px-4 py-2 bg-gray-100 hover:bg-secondary-50 text-gray-700 hover:text-secondary-600 rounded-lg text-sm font-medium transition-colors border border-gray-200 hover:border-secondary-200"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {timeOption.label}
+                    </motion.button>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>
