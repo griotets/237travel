@@ -423,6 +423,20 @@ const SearchResults = () => {
             )}
           </div>
         </div>
+
+        {/* Booking Modal */}
+        {isBookingModalOpen && selectedTrip && (
+          <BookingModal
+            trip={selectedTrip}
+            isOpen={isBookingModalOpen}
+            onClose={() => {
+              setIsBookingModalOpen(false)
+              setSelectedTrip(null)
+            }}
+            onConfirm={confirmBooking}
+            passengers={parseInt(passengers)}
+          />
+        )}
       </div>
     </div>
   )
