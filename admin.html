@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration - 237Travel</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Admin Header -->
+    <div class="admin-header">
+        <div class="container">
+            <h1><i class="fas fa-tachometer-alt"></i> Administration 237Travel</h1>
+            <p>Tableau de bord pour la gestion des réservations et des services</p>
+        </div>
+    </div>
+
+    <!-- Admin Navigation -->
+    <nav class="admin-nav">
+        <div class="container">
+            <ul>
+                <li><a href="#dashboard" class="admin-nav-link active" data-section="dashboard">Tableau de bord</a></li>
+                <li><a href="#bookings" class="admin-nav-link" data-section="bookings">Réservations</a></li>
+                <li><a href="#services" class="admin-nav-link" data-section="services">Services</a></li>
+                <li><a href="#customers" class="admin-nav-link" data-section="customers">Clients</a></li>
+                <li><a href="#reports" class="admin-nav-link" data-section="reports">Rapports</a></li>
+                <li><a href="#settings" class="admin-nav-link" data-section="settings">Paramètres</a></li>
+                <li><a href="index.html" class="admin-nav-link">Retour au site</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Admin Content -->
+    <div class="admin-content">
+        <div class="container">
+            
+            <!-- Dashboard Section -->
+            <div id="dashboard" class="admin-section active">
+                <h2 class="section-title">Tableau de bord</h2>
+                
+                <!-- Stats Cards -->
+                <div class="admin-stats">
+                    <div class="stat-card">
+                        <h3 id="totalBookings">247</h3>
+                        <p>Réservations totales</p>
+                        <i class="fas fa-ticket-alt"></i>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="todayBookings">18</h3>
+                        <p>Réservations aujourd'hui</p>
+                        <i class="fas fa-calendar-day"></i>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="totalRevenue">8,750,000</h3>
+                        <p>Revenus (FCFA)</p>
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="activeCustomers">156</h3>
+                        <p>Clients actifs</p>
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h3>Actions rapides</h3>
+                    <div class="action-buttons">
+                        <button class="btn-primary" onclick="showSection('bookings')">
+                            <i class="fas fa-plus"></i> Nouvelle réservation
+                        </button>
+                        <button class="btn-primary" onclick="showAddServiceModal()">
+                            <i class="fas fa-bus"></i> Ajouter un service
+                        </button>
+                        <button class="btn-primary" onclick="generateReport()">
+                            <i class="fas fa-chart-line"></i> Générer rapport
+                        </button>
+                        <button class="btn-primary" onclick="exportData()">
+                            <i class="fas fa-download"></i> Exporter données
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="recent-activity">
+                    <h3>Activité récente</h3>
+                    <div class="activity-list" id="recentActivity">
+                        <!-- Activity items will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bookings Section -->
+            <div id="bookings" class="admin-section">
+                <h2 class="section-title">Gestion des Réservations</h2>
+                
+                <!-- Booking Filters -->
+                <div class="booking-filters">
+                    <div class="filter-group">
+                        <label>Statut:</label>
+                        <select id="statusFilter" onchange="filterBookings()">
+                            <option value="">Tous</option>
+                            <option value="confirmed">Confirmé</option>
+                            <option value="pending">En attente</option>
+                            <option value="cancelled">Annulé</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Date:</label>
+                        <input type="date" id="dateFilter" onchange="filterBookings()">
+                    </div>
+                    <div class="filter-group">
+                        <label>Type:</label>
+                        <select id="typeFilter" onchange="filterBookings()">
+                            <option value="">Tous</option>
+                            <option value="transport">Transport</option>
+                            <option value="event">Événement</option>
+                            <option value="tour">Excursion</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <input type="text" id="searchBookings" placeholder="Rechercher..." onkeyup="searchBookings()">
+                    </div>
+                </div>
+
+                <!-- Bookings Table -->
+                <div class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Client</th>
+                                <th>Service</th>
+                                <th>Date</th>
+                                <th>Montant</th>
+                                <th>Statut</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookingsTableBody">
+                            <!-- Booking rows will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Services Section -->
+            <div id="services" class="admin-section">
+                <h2 class="section-title">Gestion des Services</h2>
+                
+                <div class="services-grid">
+                    <!-- Transport Services -->
+                    <div class="service-category">
+                        <h3><i class="fas fa-bus"></i> Transport</h3>
+                        <div class="service-list" id="transportServices">
+                            <!-- Transport services will be populated by JavaScript -->
+                        </div>
+                        <button class="btn-primary" onclick="addService('transport')">
+                            <i class="fas fa-plus"></i> Ajouter transport
+                        </button>
+                    </div>
+
+                    <!-- Event Services -->
+                    <div class="service-category">
+                        <h3><i class="fas fa-calendar"></i> Événements</h3>
+                        <div class="service-list" id="eventServices">
+                            <!-- Event services will be populated by JavaScript -->
+                        </div>
+                        <button class="btn-primary" onclick="addService('event')">
+                            <i class="fas fa-plus"></i> Ajouter événement
+                        </button>
+                    </div>
+
+                    <!-- Tour Services -->
+                    <div class="service-category">
+                        <h3><i class="fas fa-mountain"></i> Excursions</h3>
+                        <div class="service-list" id="tourServices">
+                            <!-- Tour services will be populated by JavaScript -->
+                        </div>
+                        <button class="btn-primary" onclick="addService('tour')">
+                            <i class="fas fa-plus"></i> Ajouter excursion
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customers Section -->
+            <div id="customers" class="admin-section">
+                <h2 class="section-title">Gestion des Clients</h2>
+                
+                <div class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nom</th>
+                                <th>Email</th>
+                                <th>Téléphone</th>
+                                <th>Inscrit le</th>
+                                <th>Réservations</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customersTableBody">
+                            <!-- Customer rows will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Reports Section -->
+            <div id="reports" class="admin-section">
+                <h2 class="section-title">Rapports et Statistiques</h2>
+                
+                <!-- Report Filters -->
+                <div class="report-filters">
+                    <div class="filter-group">
+                        <label>Période:</label>
+                        <select id="reportPeriod" onchange="updateReports()">
+                            <option value="week">Cette semaine</option>
+                            <option value="month">Ce mois</option>
+                            <option value="quarter">Ce trimestre</option>
+                            <option value="year">Cette année</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Type de rapport:</label>
+                        <select id="reportType" onchange="updateReports()">
+                            <option value="sales">Ventes</option>
+                            <option value="bookings">Réservations</option>
+                            <option value="customers">Clients</option>
+                            <option value="services">Services</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Charts Placeholder -->
+                <div class="charts-container">
+                    <div class="chart-card">
+                        <h4>Évolution des ventes</h4>
+                        <div class="chart-placeholder">
+                            <i class="fas fa-chart-line"></i>
+                            <p>Graphique des ventes par période</p>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h4>Répartition par service</h4>
+                        <div class="chart-placeholder">
+                            <i class="fas fa-chart-pie"></i>
+                            <p>Graphique en secteurs des services</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Report Summary -->
+                <div class="report-summary" id="reportSummary">
+                    <!-- Summary will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div id="settings" class="admin-section">
+                <h2 class="section-title">Paramètres</h2>
+                
+                <div class="settings-grid">
+                    <!-- General Settings -->
+                    <div class="settings-card">
+                        <h3>Paramètres généraux</h3>
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label>Nom de l'agence:</label>
+                                <input type="text" value="237Travel" id="agencyName">
+                            </div>
+                            <div class="form-group">
+                                <label>Email de contact:</label>
+                                <input type="email" value="contact@237travel.cm" id="contactEmail">
+                            </div>
+                            <div class="form-group">
+                                <label>Téléphone:</label>
+                                <input type="tel" value="+237 6XX XXX XXX" id="contactPhone">
+                            </div>
+                            <button type="submit" class="btn-primary">Sauvegarder</button>
+                        </form>
+                    </div>
+
+                    <!-- Payment Settings -->
+                    <div class="settings-card">
+                        <h3>Paramètres de paiement</h3>
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label>MTN Mobile Money:</label>
+                                <input type="text" placeholder="Numéro marchand MTN" id="mtnMerchant">
+                            </div>
+                            <div class="form-group">
+                                <label>Orange Money:</label>
+                                <input type="text" placeholder="Numéro marchand Orange" id="orangeMerchant">
+                            </div>
+                            <div class="form-group">
+                                <label>Commission (%):</label>
+                                <input type="number" value="3" min="0" max="10" id="commission">
+                            </div>
+                            <button type="submit" class="btn-primary">Sauvegarder</button>
+                        </form>
+                    </div>
+
+                    <!-- Notification Settings -->
+                    <div class="settings-card">
+                        <h3>Notifications</h3>
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" checked> Email pour nouvelles réservations
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" checked> SMS pour annulations
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox"> Rapports hebdomadaires
+                                </label>
+                            </div>
+                            <button type="submit" class="btn-primary">Sauvegarder</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Add Service Modal -->
+    <div id="addServiceModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('addServiceModal')">&times;</span>
+            <h2>Ajouter un service</h2>
+            <form id="addServiceForm" onsubmit="handleAddService(event)">
+                <div class="form-group">
+                    <label>Type de service:</label>
+                    <select id="serviceType" required>
+                        <option value="">Sélectionner</option>
+                        <option value="transport">Transport</option>
+                        <option value="event">Événement</option>
+                        <option value="tour">Excursion</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Nom du service:</label>
+                    <input type="text" id="serviceName" required>
+                </div>
+                <div class="form-group">
+                    <label>Description:</label>
+                    <textarea id="serviceDescription" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Prix (FCFA):</label>
+                    <input type="number" id="servicePrice" required>
+                </div>
+                <div class="form-group" id="transportFields" style="display: none;">
+                    <label>Départ:</label>
+                    <input type="text" id="serviceDeparture">
+                    <label>Destination:</label>
+                    <input type="text" id="serviceDestination">
+                </div>
+                <div class="form-group" id="eventFields" style="display: none;">
+                    <label>Date de l'événement:</label>
+                    <input type="datetime-local" id="eventDate">
+                    <label>Lieu:</label>
+                    <input type="text" id="eventVenue">
+                </div>
+                <div class="form-group" id="tourFields" style="display: none;">
+                    <label>Durée:</label>
+                    <input type="text" id="tourDuration">
+                    <label>Difficulté:</label>
+                    <select id="tourDifficulty">
+                        <option value="facile">Facile</option>
+                        <option value="modéré">Modéré</option>
+                        <option value="difficile">Difficile</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Ajouter le service</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
