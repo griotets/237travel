@@ -28,6 +28,7 @@ const SearchResults = () => {
   const from = searchParams.get('from') || ''
   const to = searchParams.get('to') || ''
   const date = searchParams.get('date') || ''
+  const time = searchParams.get('time') || ''
   const passengers = searchParams.get('passengers') || '1'
 
   // Mock search results - in a real app, this would come from an API
@@ -117,17 +118,22 @@ const SearchResults = () => {
       }
     })
 
-    // Filter results
+    // Filter results by type and time
     const filtered = sorted.filter(result => {
-      if (filterBy === 'all') return true
-      if (filterBy === 'vip') return result.busType === 'VIP'
-      if (filterBy === 'standard') return result.busType === 'Standard'
-      if (filterBy === 'luxe') return result.busType === 'Luxe'
-      return true
+      // Filter by bus type
+      let typeMatch = true
+      if (filterBy === 'vip') typeMatch = result.busType === 'VIP'
+      else if (filterBy === 'standard') typeMatch = result.busType === 'Standard'
+      else if (filterBy === 'luxe') typeMatch = result.busType === 'Luxe'
+
+      // Filter by time if specified
+      const timeMatch = isTimeInRange(result.departureTime, time)
+
+      return typeMatch && timeMatch
     })
 
     setResults(filtered)
-  }, [sortBy, filterBy])
+  }, [sortBy, filterBy, time])
 
   const [selectedTrip, setSelectedTrip] = useState(null)
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false)
@@ -172,10 +178,34 @@ const SearchResults = () => {
     })
   }
 
+  const getTimeDisplay = (timeValue) => {
+    if (timeValue === 'morning') return 'Matin (6h-12h)'
+    if (timeValue === 'afternoon') return 'Après-midi (12h-18h)'
+    if (timeValue === 'evening') return 'Soir (18h-23h)'
+    if (timeValue.includes(':')) return timeValue
+    return 'Toute la journée'
+  }
+
+  const isTimeInRange = (departureTime, timeFilter) => {
+    if (!timeFilter) return true
+
+    const [hours] = departureTime.split(':').map(Number)
+
+    if (timeFilter === 'morning') return hours >= 6 && hours < 12
+    if (timeFilter === 'afternoon') return hours >= 12 && hours < 18
+    if (timeFilter === 'evening') return hours >= 18 && hours <= 23
+    if (timeFilter.includes(':')) {
+      const [filterHours] = timeFilter.split(':').map(Number)
+      return Math.abs(hours - filterHours) <= 2 // ±2 heures de tolérance
+    }
+
+    return true
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Search Summary */}
+        {/* Search Summary with Edit Option */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -195,6 +225,14 @@ const SearchResults = () => {
                   {date ? formatDate(date) : 'Date non spécifiée'}
                 </span>
               </div>
+              {time && (
+                <div className="flex items-center space-x-2">
+                  <Clock className="w-5 h-5 text-primary-600" />
+                  <span className="text-gray-700">
+                    {getTimeDisplay(time)}
+                  </span>
+                </div>
+              )}
               <div className="flex items-center space-x-2">
                 <Users className="w-5 h-5 text-primary-600" />
                 <span className="text-gray-700">
@@ -202,11 +240,17 @@ const SearchResults = () => {
                 </span>
               </div>
             </div>
-            
+
             <div className="text-right">
               <p className="text-sm text-gray-600">
                 {results.length} voyage{results.length > 1 ? 's' : ''} trouvé{results.length > 1 ? 's' : ''}
               </p>
+              <button
+                onClick={() => window.history.back()}
+                className="text-primary-600 hover:text-primary-700 text-sm font-medium mt-1"
+              >
+                Modifier la recherche
+              </button>
             </div>
           </div>
         </motion.div>
