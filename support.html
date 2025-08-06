@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Client - 237Travel</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><a href="index.html" style="color: white; text-decoration: none;">237Travel</a></h2>
+                <span class="tagline">Voyagez en toute confiance</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Accueil</a></li>
+                <li><a href="catalog.html" class="nav-link">Voyages</a></li>
+                <li><a href="#evenements" class="nav-link">Événements</a></li>
+                <li><a href="support.html" class="nav-link active">Support</a></li>
+                <li><a href="#" class="nav-link" onclick="showLogin()">Connexion</a></li>
+                <li><a href="#" class="cart-icon" onclick="showCart()"><i class="fas fa-shopping-cart"></i> <span class="cart-count">0</span></a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Support Header -->
+    <section class="support-header">
+        <div class="container">
+            <h1>Centre d'Aide 237Travel</h1>
+            <p>Trouvez rapidement les réponses à vos questions</p>
+            
+            <!-- Search Help -->
+            <div class="help-search">
+                <input type="text" id="helpSearch" placeholder="Rechercher dans l'aide..." onkeyup="filterFAQ()">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Questions Fréquentes</h2>
+            <div class="faq-container">
+                
+                <div class="faq-item" data-keywords="réservation booking réserver">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Comment puis-je réserver un billet ?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Pour réserver un billet :</p>
+                        <ol>
+                            <li>Utilisez le formulaire de recherche sur la page d'accueil</li>
+                            <li>Sélectionnez votre trajet, événement ou excursion</li>
+                            <li>Choisissez vos options (nombre de passagers, type de siège)</li>
+                            <li>Ajoutez au panier et procédez au paiement</li>
+                            <li>Recevez votre e-ticket par email</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="paiement payment mtn orange money mobile">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Quels modes de paiement acceptez-vous ?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nous acceptons les modes de paiement suivants :</p>
+                        <ul>
+                            <li><strong>MTN Mobile Money</strong> - Paiement sécurisé via votre compte MTN MoMo</li>
+                            <li><strong>Orange Money</strong> - Paiement sécurisé via votre compte Orange Money</li>
+                        </ul>
+                        <p>Tous les paiements sont sécurisés et instantanés.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="annulation cancellation remboursement refund">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Puis-je annuler ma réservation ?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Oui, vous pouvez annuler votre réservation selon les conditions suivantes :</p>
+                        <ul>
+                            <li><strong>Plus de 24h avant</strong> : Remboursement complet</li>
+                            <li><strong>Entre 12h et 24h avant</strong> : 50% de remboursement</li>
+                            <li><strong>Moins de 12h avant</strong> : Pas de remboursement</li>
+                        </ul>
+                        <p>Pour annuler, connectez-vous à votre compte et accédez à "Mes Billets".</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="billet ticket eticket pdf qr code">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Comment accéder à mon billet électronique ?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Après paiement, votre e-ticket est disponible :</p>
+                        <ul>
+                            <li>Dans votre compte, section "Mes Billets"</li>
+                            <li>Par email (vérifiez vos spams)</li>
+                            <li>Téléchargeable en format PDF</li>
+                        </ul>
+                        <p>Le billet contient un QR code à présenter lors du voyage.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="modification change date heure">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Puis-je modifier ma date de voyage ?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Oui, la modification est possible sous conditions :</p>
+                        <ul>
+                            <li>Au moins 12h avant le départ</li>
+                            <li>Selon disponibilité sur la nouvelle date</li>
+                            <li>Frais de modification de 1,000 FCFA</li>
+                            <li>Différence de prix si applicable</li>
+                        </ul>
+                        <p>Contactez notre support pour effectuer la modification.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="compte compte utilisateur profil">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Comment créer un compte ?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Créer un compte est simple et gratuit :</p>
+                        <ol>
+                            <li>Cliquez sur "Connexion" dans le menu</li>
+                            <li>Sélectionnez "S'inscrire"</li>
+                            <li>Remplissez vos informations</li>
+                            <li>Validez votre email</li>
+                        </ol>
+                        <p>Avec un compte, vous pouvez suivre vos réservations et accéder à vos billets.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="problème technique bug erreur">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>J'ai un problème technique, que faire ?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>En cas de problème technique :</p>
+                        <ul>
+                            <li>Actualisez la page et réessayez</li>
+                            <li>Vérifiez votre connexion internet</li>
+                            <li>Essayez avec un autre navigateur</li>
+                            <li>Contactez notre support si le problème persiste</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-keywords="bagages luggage poids">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Quelle est la politique bagages ?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Politique bagages standard :</p>
+                        <ul>
+                            <li><strong>Bagage à main</strong> : Jusqu'à 10kg inclus</li>
+                            <li><strong>Bagages en soute</strong> : Jusqu'à 23kg inclus</li>
+                            <li><strong>Excès de bagages</strong> : 500 FCFA par kg supplémentaire</li>
+                        </ul>
+                        <p>Les objets de valeur et documents doivent rester avec vous.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Nous Contacter</h2>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Informations de Contact</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>Téléphone</strong>
+                            <p>+237 6XX XXX XXX</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong>
+                            <p>support@237travel.cm</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>Adresse</strong>
+                            <p>Yaoundé, Cameroun</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>Horaires</strong>
+                            <p>Lun-Ven: 8h-18h<br>Sam: 9h-15h</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form" onsubmit="handleContactForm(event)">
+                    <h3>Envoyez-nous un message</h3>
+                    <div class="form-group">
+                        <label for="contactName">Nom complet *</label>
+                        <input type="text" id="contactName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Email *</label>
+                        <input type="email" id="contactEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactSubject">Sujet *</label>
+                        <select id="contactSubject" required>
+                            <option value="">Sélectionnez un sujet</option>
+                            <option value="reservation">Problème de réservation</option>
+                            <option value="payment">Problème de paiement</option>
+                            <option value="cancellation">Annulation/Modification</option>
+                            <option value="technical">Problème technique</option>
+                            <option value="other">Autre</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMessage">Message *</label>
+                        <textarea id="contactMessage" required placeholder="Décrivez votre demande en détail..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Envoyer le message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Chat -->
+    <div class="live-chat" id="liveChat">
+        <div class="chat-button" onclick="toggleChat()">
+            <i class="fas fa-comments"></i>
+            <span>Chat en direct</span>
+        </div>
+        <div class="chat-window hidden" id="chatWindow">
+            <div class="chat-header">
+                <h4>Support 237Travel</h4>
+                <button onclick="toggleChat()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="chat-message bot">
+                    <p>Bonjour ! Comment puis-je vous aider aujourd'hui ?</p>
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Tapez votre message..." onkeypress="handleChatEnter(event)">
+                <button onclick="sendChatMessage()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>237Travel</h3>
+                    <p>Votre partenaire de confiance pour voyager au Cameroun.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="catalog.html">Voyages</a></li>
+                        <li><a href="#evenements">Événements</a></li>
+                        <li><a href="support.html">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-phone"></i> +237 6XX XXX XXX</p>
+                    <p><i class="fas fa-envelope"></i> support@237travel.cm</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Yaoundé, Cameroun</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Paiement accepté</h4>
+                    <div class="payment-methods">
+                        <span class="payment-badge">MTN MoMo</span>
+                        <span class="payment-badge">Orange Money</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 237Travel. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="support.js"></script>
+</body>
+</html>
