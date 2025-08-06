@@ -106,7 +106,7 @@ const SearchSection = ({ isCompact = false }) => {
               type="date"
               value={searchData.date}
               onChange={(e) => handleInputChange('date', e.target.value)}
-              min={getTomorrowDate()}
+              min={getTodayDate()}
               className="w-full px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white focus:outline-none focus:border-white"
               required
             />
