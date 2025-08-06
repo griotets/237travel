@@ -46,16 +46,16 @@ const SearchSection = ({ isCompact = false }) => {
       from: searchData.from,
       to: searchData.to,
       date: searchData.date,
+      time: searchData.time,
       passengers: searchData.passengers
     })
-    
+
     navigate(`/search?${queryParams.toString()}`)
   }
 
-  const getTomorrowDate = () => {
-    const tomorrow = new Date()
-    tomorrow.setDate(tomorrow.getDate() + 1)
-    return tomorrow.toISOString().split('T')[0]
+  const getTodayDate = () => {
+    const today = new Date()
+    return today.toISOString().split('T')[0]
   }
 
   if (isCompact) {
