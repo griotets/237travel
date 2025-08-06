@@ -163,7 +163,7 @@ const SearchSection = ({ isCompact = false }) => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
-          className="search-card"
+          className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100"
         >
           <form onSubmit={handleSearch} className="space-y-6">
             {/* From/To Section */}
