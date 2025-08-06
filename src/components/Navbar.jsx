@@ -240,7 +240,9 @@ const Navbar = () => {
                     key={item.name}
                     to={item.href}
                     className={`block px-4 py-3 rounded-lg font-medium transition-colors ${
-                      location.pathname === item.href
+                      item.highlight
+                        ? 'text-white bg-secondary-500 hover:bg-secondary-600'
+                        : location.pathname === item.href
                         ? 'text-primary-600 bg-primary-50'
                         : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
                     }`}
