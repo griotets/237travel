@@ -14,11 +14,12 @@ import {
 } from 'lucide-react'
 import { useCart } from '../contexts/CartContext'
 import { useAuth } from '../contexts/AuthContext'
-import BookingModal from '../components/BookingModal'
 import SearchSection from '../components/SearchSection'
+import { useNavigate } from 'react-router-dom'
 
 const SearchResults = () => {
   const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
   const [sortBy, setSortBy] = useState('price')
   const [filterBy, setFilterBy] = useState('all')
   const [showFilters, setShowFilters] = useState(false)
@@ -193,8 +194,23 @@ const SearchResults = () => {
       return
     }
 
-    setSelectedTrip(trip)
-    setIsBookingModalOpen(true)
+    // Navigate to booking page with trip details
+    const queryParams = new URLSearchParams({
+      id: trip.id,
+      agency: trip.agency,
+      from: trip.from,
+      to: trip.to,
+      departure: trip.departureTime,
+      arrival: trip.arrivalTime,
+      duration: trip.duration,
+      price: trip.price,
+      available: trip.available,
+      rating: trip.rating,
+      busType: trip.busType,
+      date: localDate || date
+    })
+
+    navigate(`/booking?${queryParams.toString()}`)
   }
 
   const confirmBooking = (bookingDetails) => {
