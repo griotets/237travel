@@ -185,8 +185,6 @@ const SearchResults = () => {
     setResults(filtered)
   }, [sortBy, filterBy, localTime, time])
 
-  const [selectedTrip, setSelectedTrip] = useState(null)
-  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false)
 
   const handleBooking = (trip) => {
     if (!isAuthenticated) {
@@ -213,26 +211,6 @@ const SearchResults = () => {
     navigate(`/booking?${queryParams.toString()}`)
   }
 
-  const confirmBooking = (bookingDetails) => {
-    const cartItem = {
-      id: `trip_${selectedTrip.id}_${Date.now()}`,
-      name: `${selectedTrip.from} → ${selectedTrip.to}`,
-      description: `${selectedTrip.agency} - Départ ${selectedTrip.departureTime}`,
-      price: selectedTrip.price * bookingDetails.passengers,
-      image: selectedTrip.image,
-      tripDetails: {
-        ...selectedTrip,
-        passengers: bookingDetails.passengers,
-        selectedSeats: bookingDetails.selectedSeats,
-        passengerInfo: bookingDetails.passengerInfo
-      }
-    }
-
-    addItem(cartItem)
-    setIsBookingModalOpen(false)
-    setSelectedTrip(null)
-    alert(`Voyage ajouté au panier ! ${bookingDetails.passengers} place(s) réservée(s).`)
-  }
 
   const formatDate = (dateStr) => {
     return new Date(dateStr).toLocaleDateString('fr-FR', {
@@ -609,19 +587,6 @@ const SearchResults = () => {
           </div>
         </div>
 
-        {/* Booking Modal */}
-        {isBookingModalOpen && selectedTrip && (
-          <BookingModal
-            trip={selectedTrip}
-            isOpen={isBookingModalOpen}
-            onClose={() => {
-              setIsBookingModalOpen(false)
-              setSelectedTrip(null)
-            }}
-            onConfirm={confirmBooking}
-            passengers={parseInt(passengers)}
-          />
-        )}
       </div>
     </div>
   )
