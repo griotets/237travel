@@ -7,226 +7,244 @@ import {
   Search, 
   Star,
   ArrowRight,
-  Zap,
-  Shield,
   Clock,
-  Award
+  Shield,
+  Award,
+  TrendingUp,
+  CheckCircle
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import SearchSection from '../components/SearchSection'
-import ServiceCard from '../components/ServiceCard'
-import TestimonialCard from '../components/TestimonialCard'
 
 const Home = () => {
   const { scrollY } = useScroll()
   const y1 = useTransform(scrollY, [0, 300], [0, -50])
-  const y2 = useTransform(scrollY, [0, 300], [0, -100])
-  const opacity = useTransform(scrollY, [0, 200], [1, 0.8])
 
-  const cameroonDestinations = [
+  // Vraies agences de voyage camerounaises
+  const topAgencies = [
     {
       id: 1,
-      name: "Yaoundé - Douala",
-      image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=500",
-      price: "3,500 FCFA",
-      duration: "3h30",
-      rating: 4.5,
-      agency: "Voyage Express"
+      name: "Guarantee Express",
+      description: "Leader du transport interurbain au Cameroun depuis 1990",
+      rating: 4.8,
+      routes: 120,
+      vehicles: 85,
+      image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400",
+      speciality: "Yaoundé - Douala - Bafoussam"
     },
     {
       id: 2,
-      name: "Douala - Bafoussam",
-      image: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=500",
-      price: "4,500 FCFA",
-      duration: "4h15",
-      rating: 4.2,
-      agency: "Cameroon Bus"
+      name: "Central Voyage",
+      description: "Service premium pour tous vos déplacements",
+      rating: 4.6,
+      routes: 95,
+      vehicles: 67,
+      image: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=400",
+      speciality: "Transport VIP et Luxe"
     },
     {
       id: 3,
-      name: "Yaoundé - Ngaoundéré",
-      image: "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=500",
-      price: "8,000 FCFA",
-      duration: "8h00",
-      rating: 4.0,
-      agency: "Central Express"
+      name: "Alliance Voyage",
+      description: "Confort et ponctualité garantis sur tout le territoire",
+      rating: 4.7,
+      routes: 110,
+      vehicles: 72,
+      image: "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400",
+      speciality: "Couverture nationale"
+    },
+    {
+      id: 4,
+      name: "Musango Express",
+      description: "Votre partenaire de confiance pour voyager en sécurité",
+      rating: 4.5,
+      routes: 88,
+      vehicles: 55,
+      image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400",
+      speciality: "Nord - Sud Cameroun"
+    }
+  ]
+
+  // Voyages en cours populaires
+  const currentTrips = [
+    {
+      id: 1,
+      from: "Yaoundé",
+      to: "Douala",
+      agency: "Guarantee Express",
+      price: 3500,
+      departureTime: "08:00",
+      availableSeats: 12,
+      totalSeats: 50,
+      image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=300"
+    },
+    {
+      id: 2,
+      from: "Douala",
+      to: "Bafoussam",
+      agency: "Central Voyage",
+      price: 4200,
+      departureTime: "09:30",
+      availableSeats: 8,
+      totalSeats: 45,
+      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300"
+    },
+    {
+      id: 3,
+      from: "Yaoundé",
+      to: "Ngaoundéré",
+      agency: "Alliance Voyage",
+      price: 8500,
+      departureTime: "07:00",
+      availableSeats: 15,
+      totalSeats: 48,
+      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300"
+    },
+    {
+      id: 4,
+      from: "Douala",
+      to: "Bamenda",
+      agency: "Musango Express",
+      price: 5800,
+      departureTime: "10:15",
+      availableSeats: 6,
+      totalSeats: 42,
+      image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=300"
+    }
+  ]
+
+  // Choix populaires des utilisateurs
+  const popularChoices = [
+    {
+      route: "Yaoundé → Douala",
+      bookings: 1250,
+      avgPrice: 3400,
+      duration: "3h30",
+      image: "https://images.unsplash.com/photo-1519046904884-53103b34b206?w=300"
+    },
+    {
+      route: "Douala → Bafoussam",
+      bookings: 890,
+      avgPrice: 4100,
+      duration: "4h15",
+      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300"
+    },
+    {
+      route: "Yaoundé → Bamenda",
+      bookings: 567,
+      avgPrice: 6200,
+      duration: "6h45",
+      image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=300"
     }
   ]
 
   const features = [
     {
-      icon: <Zap className="w-6 h-6" />,
-      title: "Réservation Instantanée",
-      description: "Réservez vos billets en quelques clics avec confirmation immédiate"
-    },
-    {
-      icon: <Shield className="w-6 h-6" />,
-      title: "Paiement Sécurisé",
-      description: "MTN Mobile Money et Orange Money pour vos transactions en toute sécurité"
-    },
-    {
-      icon: <Clock className="w-6 h-6" />,
-      title: "Support 24/7",
-      description: "Notre équipe est disponible pour vous aider à tout moment"
-    },
-    {
-      icon: <Award className="w-6 h-6" />,
+      icon: <Shield className="w-8 h-8" />,
       title: "Agences Certifiées",
-      description: "Partenaires vérifiés et agences de transport reconnues au Cameroun"
-    }
-  ]
-
-  const testimonials = [
-    {
-      name: "Marie Ngono",
-      location: "Douala",
-      rating: 5,
-      comment: "Excellent service ! J'ai pu réserver mon voyage Douala-Yaoundé en 2 minutes. L'agence était très professionnelle.",
-      avatar: "https://ui-avatars.com/api/?name=Marie+Ngono&background=7c3aed&color=fff"
+      description: "Toutes nos agences partenaires sont vérifiées et certifiées"
     },
     {
-      name: "Jean Baptiste",
-      location: "Yaoundé",
-      rating: 5,
-      comment: "EnjoyTravel m'a fait découvrir des agences que je ne connaissais pas. Prix compétitifs et service de qualité.",
-      avatar: "https://ui-avatars.com/api/?name=Jean+Baptiste&background=f97316&color=fff"
+      icon: <Clock className="w-8 h-8" />,
+      title: "Ponctualité Garantie",
+      description: "95% de nos voyages respectent les horaires annoncés"
     },
     {
-      name: "Fatima Alim",
-      location: "Bafoussam",
-      rating: 4,
-      comment: "Très pratique pour comparer les prix entre différentes agences. Je recommande vivement !",
-      avatar: "https://ui-avatars.com/api/?name=Fatima+Alim&background=7c3aed&color=fff"
+      icon: <Award className="w-8 h-8" />,
+      title: "Service Premium",
+      description: "Un service client disponible 7j/7 pour vous accompagner"
+    },
+    {
+      icon: <CheckCircle className="w-8 h-8" />,
+      title: "Réservation Sécurisée",
+      description: "Paiement 100% sécurisé avec MTN MoMo et Orange Money"
     }
   ]
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
+      {/* Hero Section avec image de fond */}
       <section className="relative overflow-hidden min-h-screen flex items-center">
-        {/* Background */}
-        <div className="absolute inset-0 gradient-bg">
-          <motion.div
-            style={{ y: y1, opacity }}
-            className="absolute inset-0 bg-hero-pattern opacity-20"
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&q=80"
+            alt="Bus de voyage au Cameroun"
+            className="w-full h-full object-cover"
           />
-          <motion.div
-            style={{ y: y2 }}
-            className="absolute inset-0 bg-gradient-to-t from-primary-900/50 to-transparent"
-          />
-        </div>
-
-        {/* Floating geometric shapes */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(8)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-4 h-4 border border-white/30"
-              style={{
-                left: `${10 + (i * 12)}%`,
-                top: `${20 + Math.sin(i) * 30}%`,
-              }}
-              animate={{
-                y: [-20, 20, -20],
-                rotate: [0, 180, 360],
-                opacity: [0.3, 0.7, 0.3],
-              }}
-              transition={{
-                duration: 4 + Math.random() * 2,
-                repeat: Infinity,
-                delay: i * 0.5,
-                ease: "easeInOut"
-              }}
-            />
-          ))}
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-gray-900/60 to-gray-900/40"></div>
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="text-center">
-            <motion.h1
-              className="text-5xl md:text-7xl font-bold text-white mb-6 text-shadow-lg"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              Explorez le
-              <span className="block bg-gradient-to-r from-secondary-300 to-white bg-clip-text text-transparent">
-                Cameroun
-              </span>
-              en toute simplicité
-            </motion.h1>
-
-            <motion.p
-              className="text-xl md:text-2xl text-primary-100 mb-12 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              Découvrez les meilleures agences de transport camerounaises et réservez vos voyages 
-              en bus et train à travers tout le pays
-            </motion.p>
-
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
             >
-              <Link
-                to="/search"
-                className="btn-secondary text-lg px-8 py-4 flex items-center space-x-2"
-              >
-                <Search className="w-5 h-5" />
-                <span>Rechercher un voyage</span>
-              </Link>
-              <button className="btn-outline text-lg px-8 py-4 text-white border-white hover:bg-white hover:text-primary-600">
-                Découvrir les destinations
-              </button>
+              <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                Voyagez à travers le
+                <span className="block bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent">
+                  Cameroun
+                </span>
+                en toute confiance
+              </h1>
+
+              <p className="text-xl text-gray-200 mb-8 leading-relaxed">
+                Réservez vos billets avec les meilleures agences de transport camerounaises. 
+                Plus de 50 agences partenaires pour plus de 200 destinations à travers tout le pays.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 mb-12">
+                <Link
+                  to="/search"
+                  className="bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex items-center justify-center space-x-2"
+                >
+                  <Search className="w-5 h-5" />
+                  <span>Rechercher un voyage</span>
+                </Link>
+                <button className="bg-white/10 backdrop-blur-sm text-white border border-white/30 hover:bg-white/20 font-semibold py-4 px-8 rounded-lg transition-all duration-300">
+                  Voir nos agences
+                </button>
+              </div>
+
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-8 text-white">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-primary-400">50+</div>
+                  <div className="text-sm text-gray-300">Agences partenaires</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-primary-400">200+</div>
+                  <div className="text-sm text-gray-300">Destinations</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-primary-400">10,000+</div>
+                  <div className="text-sm text-gray-300">Clients satisfaits</div>
+                </div>
+              </div>
             </motion.div>
 
-            {/* Quick Stats */}
             <motion.div
-              className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-2xl mx-auto text-white"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="hidden lg:block"
             >
-              <div className="text-center">
-                <div className="text-3xl font-bold text-secondary-300">50+</div>
-                <div className="text-sm text-primary-200">Agences partenaires</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-secondary-300">200+</div>
-                <div className="text-sm text-primary-200">Destinations</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-secondary-300">5000+</div>
-                <div className="text-sm text-primary-200">Voyageurs satisfaits</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-secondary-300">4.8★</div>
-                <div className="text-sm text-primary-200">Note moyenne</div>
+              <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
+                <h3 className="text-2xl font-bold text-white mb-6">Recherche Rapide</h3>
+                <SearchSection isCompact={true} />
               </div>
             </motion.div>
           </div>
         </div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white/70 rounded-full mt-2"></div>
-          </div>
-        </motion.div>
       </section>
 
-      {/* Search Section */}
-      <SearchSection />
+      {/* Search Section for mobile */}
+      <div className="lg:hidden">
+        <SearchSection />
+      </div>
 
-      {/* Popular Destinations */}
+      {/* Voyages en cours */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -236,58 +254,62 @@ const Home = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4">
-              Destinations Populaires
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Voyages Disponibles Aujourd'hui
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Découvrez les trajets les plus demandés entre les grandes villes du Cameroun
+              Réservez dès maintenant pour ces destinations populaires
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {cameroonDestinations.map((destination, index) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {currentTrips.map((trip, index) => (
               <motion.div
-                key={destination.id}
+                key={trip.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="card card-hover group cursor-pointer"
+                className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden"
               >
-                <div className="relative overflow-hidden rounded-t-2xl">
+                <div className="relative">
                   <img
-                    src={destination.image}
-                    alt={destination.name}
-                    className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                    src={trip.image}
+                    alt={`${trip.from} to ${trip.to}`}
+                    className="w-full h-40 object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-secondary-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                      {destination.agency}
+                  <div className="absolute top-3 left-3">
+                    <span className="bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium">
+                      {trip.availableSeats} places
                     </span>
-                  </div>
-                  <div className="absolute top-4 right-4 flex items-center space-x-1 bg-white/90 px-2 py-1 rounded-full">
-                    <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                    <span className="text-sm font-medium">{destination.rating}</span>
                   </div>
                 </div>
 
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                    {destination.name}
+                <div className="p-4">
+                  <h3 className="font-semibold text-gray-900 mb-2">
+                    {trip.from} → {trip.to}
                   </h3>
-                  <div className="flex items-center justify-between mb-4">
+                  <p className="text-sm text-gray-600 mb-3">{trip.agency}</p>
+                  
+                  <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center space-x-1 text-gray-600">
                       <Clock className="w-4 h-4" />
-                      <span className="text-sm">{destination.duration}</span>
+                      <span className="text-sm">{trip.departureTime}</span>
                     </div>
-                    <div className="text-2xl font-bold text-primary-600">
-                      {destination.price}
+                    <div className="text-lg font-bold text-primary-600">
+                      {trip.price.toLocaleString()} FCFA
                     </div>
                   </div>
-                  <button className="w-full btn-primary flex items-center justify-center space-x-2">
-                    <span>Réserver maintenant</span>
-                    <ArrowRight className="w-4 h-4" />
+
+                  <div className="w-full bg-gray-200 rounded-full h-2 mb-3">
+                    <div 
+                      className="bg-orange-500 h-2 rounded-full" 
+                      style={{ width: `${((trip.totalSeats - trip.availableSeats) / trip.totalSeats) * 100}%` }}
+                    ></div>
+                  </div>
+
+                  <button className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white font-semibold py-2 px-4 rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-300">
+                    Réserver
                   </button>
                 </div>
               </motion.div>
@@ -296,7 +318,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Meilleures Agences */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -306,11 +328,164 @@ const Home = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Nos Agences Partenaires de Confiance
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Découvrez les meilleures agences de transport du Cameroun
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {topAgencies.map((agency, index) => (
+              <motion.div
+                key={agency.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100"
+              >
+                <div className="p-6">
+                  <div className="w-16 h-16 bg-gradient-to-r from-primary-100 to-secondary-100 rounded-xl flex items-center justify-center mb-4 mx-auto">
+                    <span className="text-2xl font-bold text-primary-600">
+                      {agency.name.charAt(0)}
+                    </span>
+                  </div>
+
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2 text-center">
+                    {agency.name}
+                  </h3>
+                  
+                  <p className="text-gray-600 mb-4 text-center text-sm leading-relaxed">
+                    {agency.description}
+                  </p>
+
+                  <div className="space-y-2 mb-4">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-gray-600">Note clients</span>
+                      <div className="flex items-center space-x-1">
+                        <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                        <span className="font-medium">{agency.rating}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-gray-600">Lignes</span>
+                      <span className="font-medium">{agency.routes}</span>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-gray-600">Véhicules</span>
+                      <span className="font-medium">{agency.vehicles}</span>
+                    </div>
+                  </div>
+
+                  <div className="text-center mb-4">
+                    <span className="bg-primary-50 text-primary-700 px-3 py-1 rounded-full text-xs font-medium">
+                      {agency.speciality}
+                    </span>
+                  </div>
+
+                  <button className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white font-semibold py-2 px-4 rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-300">
+                    Voir les voyages
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Choix populaires des utilisateurs */}
+      <section className="py-20 bg-gradient-to-br from-primary-50 to-secondary-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Routes les Plus Populaires
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Les destinations préférées de nos voyageurs ce mois-ci
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {popularChoices.map((choice, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+              >
+                <div className="relative">
+                  <img
+                    src={choice.image}
+                    alt={choice.route}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="absolute top-4 right-4 bg-white/90 px-3 py-1 rounded-full">
+                    <div className="flex items-center space-x-1">
+                      <TrendingUp className="w-4 h-4 text-green-500" />
+                      <span className="text-sm font-medium text-green-600">
+                        {choice.bookings} réservations
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                    {choice.route}
+                  </h3>
+                  
+                  <div className="space-y-2 mb-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-gray-600">Prix moyen</span>
+                      <span className="font-semibold text-primary-600">
+                        {choice.avgPrice.toLocaleString()} FCFA
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-gray-600">Durée</span>
+                      <span className="font-medium">{choice.duration}</span>
+                    </div>
+                  </div>
+
+                  <Link
+                    to={`/search?from=${choice.route.split(' → ')[0]}&to=${choice.route.split(' → ')[1]}`}
+                    className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white font-semibold py-3 px-4 rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-300 flex items-center justify-center space-x-2"
+                  >
+                    <span>Rechercher</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
               Pourquoi Choisir EnjoyTravel ?
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Une plateforme moderne pour tous vos besoins de transport au Cameroun
+              Nous vous garantissons la meilleure expérience de voyage
             </p>
           </motion.div>
 
@@ -322,9 +497,9 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="text-center group"
+                className="text-center"
               >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-primary-600 to-secondary-500 text-white rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-primary-100 to-secondary-100 text-primary-600 rounded-xl mb-6">
                   {feature.icon}
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">
@@ -339,40 +514,9 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-20 bg-gradient-to-br from-primary-50 to-secondary-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4">
-              Ce que disent nos clients
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Rejoignez des milliers de voyageurs satisfaits à travers le Cameroun
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <TestimonialCard
-                key={index}
-                testimonial={testimonial}
-                index={index}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
-      <section className="py-20 gradient-bg text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-hero-pattern opacity-10"></div>
-        <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-gradient-to-r from-primary-600 to-secondary-600 text-white">
+        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <motion.h2
             className="text-4xl md:text-5xl font-bold mb-6"
             initial={{ opacity: 0, y: 30 }}
@@ -383,14 +527,13 @@ const Home = () => {
             Prêt pour votre prochain voyage ?
           </motion.h2>
           <motion.p
-            className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto"
+            className="text-xl opacity-90 mb-8 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Découvrez le Cameroun avec les meilleures agences de transport. 
-            Réservation simple, paiement sécurisé, voyage confortable.
+            Rejoignez des milliers de voyageurs qui nous font confiance pour leurs déplacements à travers le Cameroun.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -400,7 +543,7 @@ const Home = () => {
           >
             <Link
               to="/search"
-              className="btn-secondary text-lg px-8 py-4 inline-flex items-center space-x-2"
+              className="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center space-x-2"
             >
               <Search className="w-5 h-5" />
               <span>Commencer ma recherche</span>
