@@ -102,12 +102,10 @@ const Navbar = () => {
                   }`}
                 >
                   <motion.span
-                    className="flex items-center space-x-2"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <span>{item.icon}</span>
-                    <span>{item.name}</span>
+                    {item.name}
                   </motion.span>
                   {location.pathname === item.href && (
                     <motion.div
