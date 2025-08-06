@@ -128,23 +128,38 @@ const SearchResults = () => {
     setResults(filtered)
   }, [sortBy, filterBy])
 
+  const [selectedTrip, setSelectedTrip] = useState(null)
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false)
+
   const handleBooking = (trip) => {
     if (!isAuthenticated) {
       alert('Veuillez vous connecter pour réserver')
       return
     }
 
+    setSelectedTrip(trip)
+    setIsBookingModalOpen(true)
+  }
+
+  const confirmBooking = (bookingDetails) => {
     const cartItem = {
-      id: `trip_${trip.id}_${Date.now()}`,
-      name: `${trip.from} → ${trip.to}`,
-      description: `${trip.agency} - Départ ${trip.departureTime}`,
-      price: trip.price,
-      image: trip.image,
-      tripDetails: trip
+      id: `trip_${selectedTrip.id}_${Date.now()}`,
+      name: `${selectedTrip.from} → ${selectedTrip.to}`,
+      description: `${selectedTrip.agency} - Départ ${selectedTrip.departureTime}`,
+      price: selectedTrip.price * bookingDetails.passengers,
+      image: selectedTrip.image,
+      tripDetails: {
+        ...selectedTrip,
+        passengers: bookingDetails.passengers,
+        selectedSeats: bookingDetails.selectedSeats,
+        passengerInfo: bookingDetails.passengerInfo
+      }
     }
 
     addItem(cartItem)
-    alert('Voyage ajouté au panier !')
+    setIsBookingModalOpen(false)
+    setSelectedTrip(null)
+    alert(`Voyage ajouté au panier ! ${bookingDetails.passengers} place(s) réservée(s).`)
   }
 
   const formatDate = (dateStr) => {
