@@ -514,8 +514,97 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Agency CTA Section */}
+      <section className="py-20 bg-secondary-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <div className="grid lg:grid-cols-2 gap-0">
+              {/* Left Side - Content */}
+              <div className="p-8 lg:p-12 flex flex-col justify-center">
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+                    Vous êtes une agence de transport ?
+                  </h2>
+                  <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                    Rejoignez EnjoyTravel et accédez à des milliers de clients potentiels.
+                    Améliorez votre visibilité et gérez vos réservations facilement.
+                  </p>
+
+                  <div className="space-y-4 mb-8">
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                      <span className="text-gray-700">Augmentez votre clientèle</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                      <span className="text-gray-700">Gestion simplifiée des réservations</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                      <span className="text-gray-700">Commission attractive</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                      <span className="text-gray-700">Support dédié 7j/7</span>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <Link
+                      to="/register-agency"
+                      className="bg-secondary-500 hover:bg-secondary-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center justify-center space-x-2"
+                    >
+                      <span>Rejoindre maintenant</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                    <Link
+                      to="/agencies"
+                      className="border-2 border-gray-300 hover:border-secondary-500 text-gray-700 hover:text-secondary-600 font-semibold py-3 px-6 rounded-lg transition-all duration-300 inline-flex items-center justify-center space-x-2"
+                    >
+                      <span>Voir nos agences</span>
+                    </Link>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Right Side - Image */}
+              <motion.div
+                className="relative bg-gray-100 lg:h-auto h-64"
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=600&h=400&fit=crop"
+                  alt="Agence de transport"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-secondary-600/20"></div>
+
+                {/* Floating stats */}
+                <div className="absolute top-6 left-6 bg-white rounded-lg p-4 shadow-lg">
+                  <div className="text-2xl font-bold text-secondary-600">50+</div>
+                  <div className="text-sm text-gray-600">Agences partenaires</div>
+                </div>
+
+                <div className="absolute bottom-6 right-6 bg-white rounded-lg p-4 shadow-lg">
+                  <div className="text-2xl font-bold text-primary-600">10k+</div>
+                  <div className="text-sm text-gray-600">Voyageurs/mois</div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-primary-600 to-secondary-600 text-white">
+      <section className="py-20 bg-primary-600 text-white">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <motion.h2
             className="text-4xl md:text-5xl font-bold mb-6"
