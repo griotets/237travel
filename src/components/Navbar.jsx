@@ -68,20 +68,9 @@ const Navbar = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <div className="w-12 h-12 bg-gradient-to-r from-primary-600 to-secondary-500 rounded-xl flex items-center justify-center shadow-lg">
+                <div className="w-12 h-12 bg-primary-600 rounded-xl flex items-center justify-center shadow-lg">
                   <span className="text-white font-bold text-lg">ET</span>
                 </div>
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-primary-600 to-secondary-500 rounded-xl"
-                  animate={{ 
-                    boxShadow: [
-                      '0 0 20px rgba(124, 58, 237, 0.3)',
-                      '0 0 30px rgba(124, 58, 237, 0.5)',
-                      '0 0 20px rgba(124, 58, 237, 0.3)'
-                    ]
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
               </motion.div>
               <div>
                 <h1 className="text-2xl font-bold gradient-text">EnjoyTravel</h1>
@@ -109,7 +98,7 @@ const Navbar = () => {
                   </motion.span>
                   {location.pathname === item.href && (
                     <motion.div
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-600 to-secondary-500"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-600"
                       layoutId="navbar-indicator"
                       transition={{ duration: 0.3 }}
                     />
