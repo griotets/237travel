@@ -14,6 +14,7 @@ import {
 } from 'lucide-react'
 import { useCart } from '../contexts/CartContext'
 import { useAuth } from '../contexts/AuthContext'
+import BookingModal from '../components/BookingModal'
 
 const SearchResults = () => {
   const [searchParams] = useSearchParams()
